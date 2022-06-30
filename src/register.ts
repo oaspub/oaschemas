@@ -1,6 +1,6 @@
 import addFormats from 'ajv-formats'
 import Ajv from 'ajv/dist/2019'
-import * as OAS from '../src/schemas'
+import * as OAS from './schemas'
 
 export function register (ajv = new Ajv()): Ajv {
   ajv
