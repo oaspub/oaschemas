@@ -1,3 +1,4 @@
+import { TSchema, Type } from '@sinclair/typebox'
 import addFormats from 'ajv-formats'
 import Ajv from 'ajv/dist/2019'
 import * as OAS from './schemas'
@@ -22,7 +23,11 @@ export function register (ajv = new Ajv()): Ajv {
     'relative-json-pointer',
     'regex'
   ])
-  const schemas = Object.values(OAS).filter(value => Object.hasOwnProperty.call(value, '$id'))
-  ajv.addSchema(schemas)
+  ajv.addSchema(getSchemas(false))
   return ajv
+}
+
+export function getSchemas(strict = true): typeof strict extends true ? unknown[] : TSchema[] {
+  const schemas = Object.values(OAS).filter(value => Object.hasOwnProperty.call(value, '$id'))
+  return strict ? schemas.map(schema => Type.Strict(schema)) : schemas
 }
