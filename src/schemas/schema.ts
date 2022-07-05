@@ -5,24 +5,24 @@ export const TSchema = Type.Any({
   $id: 'Schema',
   examples: [
     {
-      type: "string",
-      format: "email"
+      type: 'string',
+      format: 'email'
     },
     {
       components: {
         schemas: {
           ErrorModel: {
-            type: "object",
+            type: 'object',
             required: [
-              "message",
-              "code"
+              'message',
+              'code'
             ],
             properties: {
               message: {
-                type: "string"
+                type: 'string'
               },
               code: {
-                type: "integer",
+                type: 'integer',
                 minimum: 100,
                 maximum: 600
               }
@@ -31,16 +31,16 @@ export const TSchema = Type.Any({
           ExtendedErrorModel: {
             allOf: [
               {
-                $ref: "#/components/schemas/ErrorModel"
+                $ref: '#/components/schemas/ErrorModel'
               },
               {
-                type: "object",
+                type: 'object',
                 required: [
-                  "rootCause"
+                  'rootCause'
                 ],
                 properties: {
                   rootCause: {
-                    type: "string"
+                    type: 'string'
                   }
                 }
               }

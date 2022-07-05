@@ -13,15 +13,15 @@ export const TLink = Type.Object({
   examples: [
     {},
     {
-      operationId: "getUserAddress",
+      operationId: 'getUserAddress',
       parameters: {
-        userId: "$request.path.id"
+        userId: '$request.path.id'
       }
     },
     {
-      operationRef: "#/paths/~12.0~1repositories~1{username}/get",
+      operationRef: '#/paths/~12.0~1repositories~1{username}/get',
       parameters: {
-        username: "$response.body#/username"
+        username: '$response.body#/username'
       }
     }
   ]

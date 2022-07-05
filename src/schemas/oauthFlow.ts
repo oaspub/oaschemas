@@ -14,7 +14,7 @@ export const TOauthFlow = Type.Object({
       scopes: {
         'write:pets': 'modify pets in your account',
         'read:pets': 'read your pets'
-      },
+      }
     },
     {
       authorizationUrl: 'https://example.com/api/oauth/dialog',

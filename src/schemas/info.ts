@@ -2,7 +2,6 @@ import { Type, Static } from '@sinclair/typebox'
 import { TContact } from './contact'
 import { TLicense } from './license'
 import { regex } from '../util/semver'
-import { TSchema } from './schema'
 
 export const TInfo = Type.Object({
   title: Type.String(),

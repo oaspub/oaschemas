@@ -41,7 +41,7 @@ export const TOauthFlows = Type.Object({
           'write:pets': 'modify pets in your account',
           'read:pets': 'read your pets'
         }
-      },
+      }
     }
   ]
 })

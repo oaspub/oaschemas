@@ -1,6 +1,5 @@
 import { Type, Static } from '@sinclair/typebox'
 import { TMediaType } from './mediaType'
-import { TLink } from './link'
 
 export const TRequestBody = Type.Object({
   description: Type.Optional(Type.String()),

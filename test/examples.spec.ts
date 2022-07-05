@@ -1,7 +1,7 @@
 import { getSchemas, Validator, AjvError } from '../src'
 import { TSchema } from '@sinclair/typebox'
 
-let schemas: [string, TSchema][] = getSchemas().map((schema, i) => [schema.$id ?? `unknown schema at index [${i}]`, schema])
+const schemas: Array<[string, TSchema]> = getSchemas().map((schema, i) => [schema.$id ?? `unknown schema at index [${i}]`, schema])
 
 describe.each(schemas)('%s validates all its examples', (id, schema) => {
   let validator: Validator
@@ -13,7 +13,7 @@ describe.each(schemas)('%s validates all its examples', (id, schema) => {
     validator = new Validator(schema)
   })
 
-  const examples: [number, any][] = schema.examples.map((example, i) => [i, example])
+  const examples: Array<[number, any]> = schema.examples.map((example, i) => [i, example])
   test.concurrent.each(examples)('Validates example %i', (i, example) => {
     expect(() => validator.parse(example)).not.toThrow(AjvError)
   })
