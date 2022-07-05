@@ -59,7 +59,7 @@ export function getSchemas (strict = true): typeof strict extends true ? unknown
     OAS.TSecuritySchemeType,
     OAS.TServer,
     OAS.TServerVariable,
-    OAS.TTag,
+    OAS.TTag
   ]
   return strict ? schemas.map(schema => Type.Strict(schema)) : schemas
 }

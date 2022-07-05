@@ -13,17 +13,17 @@ export class Validator<T extends TSchema = any> {
     this.ajv = ajv
     Schemas.register(this.ajv)
 
-    const id = typeof schema === 'string' ? schema : schema.$id!
-    const found = this.ajv.getSchema<T>(id)
+    const id = typeof schema === 'string' ? schema : schema.$id
+    const found = id != null ? this.ajv.getSchema<T>(id) : null
 
-    if (typeof schema !== 'string' && (!Object.hasOwnProperty.call(schema, '$id') || !found)) {
+    if (typeof schema !== 'string' && (!Object.hasOwnProperty.call(schema, '$id') || (found == null))) {
       this.schema = schema
       this.validate = this.ajv.compile<T>(schema)
       return
     }
 
-    if (!found) {
-      throw TypeError(`The schema with $id ${id} could not be found`)
+    if (found == null) {
+      throw TypeError(`The schema with $id ${id ?? 'unknown'} could not be found`)
     }
 
     this.schema = found.schema as T
