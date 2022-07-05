@@ -5,6 +5,19 @@ export const TExample = Type.Object({
   description: Type.Optional(Type.String()),
   value: Type.Optional(Type.Any()),
   externalValue: Type.Optional(Type.String())
-}, { $id: 'Example' })
+}, {
+  $id: 'Example',
+  examples: [
+    {},
+    {
+      summary: 'A foo example',
+      value: { foo: 'bar' }
+    },
+    {
+      summary: 'This is a text example',
+      externalValue: 'https://foo.bar/examples/address-example.txt'
+    }
+  ]
+})
 
 export type Example = Static<typeof TExample>

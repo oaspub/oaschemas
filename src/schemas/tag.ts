@@ -4,7 +4,19 @@ import { TExternalDocumentation } from './externalDocumentation'
 export const TTag = Type.Object({
   name: Type.String(),
   description: Type.Optional(Type.String()),
-  externalDoc: Type.Optional(Type.Ref(TExternalDocumentation))
-}, { $id: 'Tag' })
+  externalDoc: Type.Optional(Type.Ref(TExternalDocumentation, { default: TExternalDocumentation.examples[0] }))
+}, {
+  $id: 'Tag',
+  examples: [
+    { name: 'Resource' },
+    {
+      name: 'Resource',
+      description: 'A subresource tag example',
+      externalDoc: {
+        url: 'https://example.com/resource'
+      }
+    }
+  ]
+})
 
 export type Tag = Static<typeof TTag>

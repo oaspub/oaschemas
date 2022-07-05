@@ -12,12 +12,23 @@ export const THeader = Type.Object({
   style: Type.Optional(Type.Ref(TParameterStyle)),
   explode: Type.Optional(Type.Boolean()),
   allowReserved: Type.Optional(Type.Boolean()),
-  schema: Type.Optional(Type.Ref(TSchema)),
+  schema: Type.Optional(Type.Ref(TSchema, { default: TSchema.examples[0] })),
   example: Type.Optional(Type.Any()),
   examples: Type.Optional(Type.Record(Type.String(), Type.Union([
-    Type.Ref(TReference),
-    Type.Ref(TExample)
+    Type.Ref(TReference, { default: TReference.examples[0] }),
+    Type.Ref(TExample, { default: TExample.examples[0] })
   ])))
-}, { $id: 'Header' })
+}, {
+  $id: 'Header',
+  examples: [
+    {},
+    {
+      description: "The number of allowed requests in the current period",
+      schema: {
+        type: "integer"
+      }
+    }
+  ]
+})
 
 export type Header = Static<typeof THeader>
