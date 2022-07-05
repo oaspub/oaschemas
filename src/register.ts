@@ -28,6 +28,38 @@ export function register (ajv = new Ajv()): Ajv {
 }
 
 export function getSchemas (strict = true): typeof strict extends true ? unknown[] : TSchema[] {
-  const schemas = Object.values(OAS).filter(value => Object.hasOwnProperty.call(value, '$id'))
+  const schemas = [
+    OAS.TCallback,
+    OAS.TComponents,
+    OAS.TContact,
+    OAS.TDocument,
+    OAS.TEncoding,
+    OAS.TExample,
+    OAS.TExternalDocumentation,
+    OAS.THeader,
+    OAS.TInfo,
+    OAS.TLicense,
+    OAS.TLink,
+    OAS.TMediaType,
+    OAS.TOauthFlow,
+    OAS.TOauthFlows,
+    OAS.TOauthFlowType,
+    OAS.TOperation,
+    OAS.TParameter,
+    OAS.TParameterLocation,
+    OAS.TParameterStyle,
+    OAS.TPathItem,
+    OAS.TMethod,
+    OAS.TReference,
+    OAS.TRequestBody,
+    OAS.TResponse,
+    OAS.TSchema,
+    OAS.TSecurityRequirement,
+    OAS.TSecurityScheme,
+    OAS.TSecuritySchemeType,
+    OAS.TServer,
+    OAS.TServerVariable,
+    OAS.TTag,
+  ]
   return strict ? schemas.map(schema => Type.Strict(schema)) : schemas
 }
