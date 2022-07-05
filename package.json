@@ -1,6 +1,6 @@
 {
   "name": "@oaspub/oaschemas",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "OpenAPI v3 JSON Schemas built with AJV and Typebox",
   "main": "dist/index.js",
   "directories": {
