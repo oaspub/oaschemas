@@ -1,15 +1,33 @@
 import { Static, TSchema } from '@sinclair/typebox'
 import Ajv, { ValidateFunction } from 'ajv/dist/2019'
-import { register } from './register'
+import * as Schemas from './register'
 
-export class Validator<T extends TSchema> {
+export class Validator<T extends TSchema = any> {
+  readonly schema: T
+  private readonly ajv: Ajv
   public readonly validate: ValidateFunction<Static<T>>
   constructor (
-    public readonly schema: T,
-    private readonly ajv = new Ajv()
+    schema: T | string,
+    ajv = new Ajv()
   ) {
-    register(this.ajv)
-    this.validate = this.ajv.compile(schema)
+    this.ajv = ajv
+    Schemas.register(this.ajv)
+
+    const id = typeof schema === 'string' ? schema : schema.$id!
+    const found = this.ajv.getSchema<T>(id)
+
+    if (typeof schema !== 'string' && (!Object.hasOwnProperty.call(schema, '$id') || !found)) {
+      this.schema = schema
+      this.validate = this.ajv.compile<T>(schema)
+      return
+    }
+
+    if (!found) {
+      throw TypeError(`The schema with $id ${id} could not be found`)
+    }
+
+    this.schema = found.schema as T
+    this.validate = found
   }
 
   parse (data: unknown, errorMessage?: string): Static<T> {
